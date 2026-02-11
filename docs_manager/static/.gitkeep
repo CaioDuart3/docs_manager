@@ -1,0 +1,2 @@
+# Diretório para arquivos estáticos do projeto (CSS, JS, imagens que não são do django.contrib)
+# Os arquivos aqui serão copiados para /staticfiles/ durante collectstatic
