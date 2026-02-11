@@ -1,0 +1,20 @@
+<h1>{{ document.title }}</h1>
+<p>{{ document.description }}</p>
+<a href="{{ document.file.url }}" target="_blank">Download</a>
+
+<h2>Comments</h2>
+<ul>
+{% for comment in document.comments.all %}
+    <li>{{ comment.text }} - {{ comment.created_at }}</li>
+{% empty %}
+    <li>No comments yet.</li>
+{% endfor %}
+</ul>
+
+<h3>Add Comment</h3>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add Comment</button>
+</form>
+<a href="{% url 'documents_list' %}">Back</a>
