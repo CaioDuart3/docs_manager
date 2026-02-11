@@ -1,0 +1,13 @@
+<h1>Documents</h1>
+
+<a href="{% url 'documents_upload' %}">Upload Document</a>
+<ul>
+    {% for document in documents %}
+        <li>
+            <h2>{{ document.title }}</h2> - {{ document.uploaded_at }}
+            
+        </li>
+        {% empty %}
+            <li>No documents available.</li>
+    {% endfor %}
+</ul>
