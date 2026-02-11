@@ -33,3 +33,10 @@ def documents_upload(request):
     else:
         form = DocumentForm()
     return render(request, 'documents/documents_upload.html', {'form': form})
+
+def documents_delete(request, pk):
+    document = get_object_or_404(Document, pk=pk)
+    if request.method == 'POST':
+        document.delete()
+        return redirect('documents_list')
+    return redirect('documents_list')
