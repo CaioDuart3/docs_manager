@@ -1,1 +1,83 @@
+# Environment variables
+.env
+.env.local
+.env.*.local
+.env.production
+*.pem
+
+# Python
+*__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
 venv/
+ENV/
+env.bak/
+venv.bak/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/pydist/
+*.egg-info/
+.installed.cfg
+*.egg
+PIPFILE.lock
+
+# Django
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+/media/
+/staticfiles/
+/static/
+*.pot
+
+# IDE & Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+.atom/
+.sublime-workspace
+.sublime-project
+*.iml
+.classpath
+.c9/
+*.launch
+.settings/
+
+# Testing
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+.pytest_cache/
+.hypothesis/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Runtime
+*.pid
+*.seed
+*.pid.lock
+
+# OS
+Thumbs.db
+.directory
