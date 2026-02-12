@@ -11,6 +11,7 @@ def documents_list(request):
     
     # Busca por título
     search = request.GET.get('search')
+    
     if search:
         documents = documents.filter(title__icontains=search)
     

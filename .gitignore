@@ -6,7 +6,7 @@
 *.pem
 
 # Python
-*__pycache__/
+**/__pycache__/
 *.py[cod]
 *$py.class
 *.so
@@ -40,10 +40,12 @@ PIPFILE.lock
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
-/media/
-/staticfiles/
-/static/
+*/media/
+*/staticfiles/
+*/static/
+!*/static/.gitkeep
 *.pot
+*.sqlite3
 
 # IDE & Editors
 .vscode/
@@ -60,6 +62,7 @@ db.sqlite3-journal
 .c9/
 *.launch
 .settings/
+*.sublime-settings
 
 # Testing
 .coverage
