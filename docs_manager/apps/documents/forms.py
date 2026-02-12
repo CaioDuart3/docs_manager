@@ -1,13 +1,36 @@
-from django import forms
-from .models import Document, Comment
+"""
+forms.py
+
+Define os formulários da aplicação para criação de documentos e comentários.
+
+Formulários disponíveis:
+- DocumentForm: usado para upload e validação de documentos.
+- CommentForm: usado para criar comentários associados a documentos.
+
+Notas:
+    - O DocumentForm inclui validação de tamanho máximo de arquivo (50MB)
+      e checagem de extensões permitidas.
+    - O CommentForm usa widgets personalizados para melhor UX.
+"""
 
 import os
 from django import forms
-from .models import Document
+from .models import Document, Comment
+
 
 class DocumentForm(forms.ModelForm):
-    """Formulário para upload de documento"""
+    """
+    Formulário para upload de documentos.
 
+    Campos:
+        title: título do documento.
+        description: descrição opcional.
+        file: arquivo a ser enviado.
+
+    Validações:
+        - Tamanho máximo do arquivo: 50MB.
+        - Extensões permitidas: pdf, doc, docx, txt, xlsx, csv, jpg, jpeg, png, gif.
+    """
     class Meta:
         model = Document
         fields = ['title', 'description', 'file']
@@ -31,11 +54,23 @@ class DocumentForm(forms.ModelForm):
         }
 
     def clean_file(self):
+        """
+        Valida o arquivo enviado pelo usuário.
+
+        - Verifica se o arquivo não excede 50MB.
+        - Verifica se a extensão do arquivo está entre as permitidas.
+        
+        Raises:
+            forms.ValidationError: se o arquivo for maior que 50 mb ou tiver extensão inválida.
+
+        Returns:
+            UploadedFile: arquivo validado.
+        """
         file = self.cleaned_data.get('file')
         if not file:
             return file
 
-        # 🔒 Tamanho máximo: 50MB
+        # tamanho máximo: 50MB
         max_size = 50 * 1024 * 1024
         if file.size > max_size:
             raise forms.ValidationError(
@@ -43,7 +78,7 @@ class DocumentForm(forms.ModelForm):
                 f'({file.size / 1024 / 1024:.2f}MB)'
             )
 
-        # 🧾 Extensões permitidas
+        # extensões permitidas
         allowed_extensions = {
             'pdf', 'doc', 'docx', 'txt', 'xlsx', 'csv',
             'jpg', 'jpeg', 'png', 'gif'
@@ -59,7 +94,17 @@ class DocumentForm(forms.ModelForm):
 
         return file
 
+
 class CommentForm(forms.ModelForm):
+    """
+    Formulário para criação de comentários em documentos.
+
+    Campos:
+        text: conteúdo do comentário.
+
+    Widgets:
+        - Textarea personalizado para melhor experiência do usuário.
+    """
     class Meta:
         model = Comment
         fields = ['text']
@@ -74,4 +119,3 @@ class CommentForm(forms.ModelForm):
                 'placeholder': 'Seu comentário'
             })
         }
-    
