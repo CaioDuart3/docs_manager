@@ -133,3 +133,6 @@ if os.path.isdir(_static_dir):
     STATICFILES_DIRS = [_static_dir]
 else:
     STATICFILES_DIRS = []
+
+LOGOUT_REDIRECT_URL = 'login'
+LOGIN_REDIRECT_URL = 'documents_list'

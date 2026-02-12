@@ -42,6 +42,13 @@
     {% empty %}
         <li>No documents available.</li>
     {% endfor %}
+
+    <!-- logout -->
+    <form method="post" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <button type="submit">Sair</button>
+</form>
+
 </ul>
 </body>
 </html>

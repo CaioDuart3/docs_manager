@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.http import FileResponse
-from io import BytesIO
 from .models import Document, Comment
 from .forms import DocumentForm, CommentForm
 from django.contrib.auth.decorators import login_required
@@ -48,23 +47,14 @@ def documents_upload(request):
         form = DocumentForm(request.POST, request.FILES)
         if form.is_valid():
             try:
-                # Criar novo documento
-                document = Document()
-                document.title = form.cleaned_data['title']
-                document.description = form.cleaned_data['description']
-                document.author = request.user  # Atribua o objeto User diretamente
+                # Salvar o formulário (Django cuida de salvar o arquivo na pasta local)
+                print("Salvando documento...")
+                document = form.save(commit=False)
+                document.author = request.user
                 
-                # Ler o arquivo enviado e salvá-lo no banco como dados binários
+                # Salvar metadados do arquivo
                 if request.FILES.get('file'):
                     file_obj = request.FILES['file']
-                    
-                    # Ler conteúdo do arquivo
-                    file_content = file_obj.read()
-                    
-                    # Salvar como BinaryField
-                    document.file = file_content
-                    
-                    # Salvar metadados
                     document.file_name = file_obj.name
                     document.file_size = file_obj.size
                     document.file_type = file_obj.content_type
@@ -75,7 +65,7 @@ def documents_upload(request):
                 
                 messages.success(
                     request, 
-                    f'Documento "{document.title}" salvo no banco com sucesso! ({document.get_file_size_display()})'
+                    f'Documento "{document.title}" salvo com sucesso! ({document.get_file_size_display()})'
                 )
                 return redirect('documents_list')
             
@@ -83,6 +73,7 @@ def documents_upload(request):
                 messages.error(request, f'Erro ao salvar o documento: {str(e)}')
                 print(f"Erro no upload: {e}")
         else:
+            print("Formulário inválido:", form.errors)
             # Mostrar erros de validação
             for field, errors in form.errors.items():
                 for error in errors:
@@ -99,6 +90,9 @@ def documents_delete(request, pk):
     if request.method == 'POST':
         try:
             title = document.title
+            # Deletar arquivo da pasta local
+            if document.file:
+                document.file.delete()
             document.delete()
             messages.success(request, f'Documento "{title}" deletado com sucesso!')
         except Exception as e:
@@ -109,12 +103,12 @@ def documents_delete(request, pk):
 
 @login_required
 def documents_download(request, pk):
-    """Download do arquivo armazenado no banco"""
+    """Download do arquivo armazenado em pasta local"""
     document = get_object_or_404(Document, pk=pk)
     
     try:
-        # Criar resposta com o arquivo binário do banco
-        response = FileResponse(BytesIO(document.file), as_attachment=True)
+        # Abrir arquivo da pasta local
+        response = FileResponse(document.file.open('rb'), as_attachment=True)
         response['Content-Disposition'] = f'attachment; filename="{document.file_name}"'
         response['Content-Type'] = document.file_type or 'application/octet-stream'
         return response

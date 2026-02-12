@@ -14,8 +14,9 @@ class Document(models.Model):
     blank=True
     )
 
-    file = models.BinaryField(
-        help_text="Arquivo armazenado no banco de dados"
+    file = models.FileField(
+        upload_to='documents/',
+        help_text="Arquivo armazenado em pasta local"
     )
     file_name = models.CharField(max_length=255, default='arquivo', help_text="Nome original do arquivo")
     file_size = models.BigIntegerField(default=0, help_text="Tamanho do arquivo em bytes")
