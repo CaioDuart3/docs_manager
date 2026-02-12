@@ -4,8 +4,10 @@ from django.http import FileResponse
 from io import BytesIO
 from .models import Document, Comment
 from .forms import DocumentForm, CommentForm
+from django.contrib.auth.decorators import login_required
 import os
 
+@login_required
 def documents_list(request):
     documents = Document.objects.all()
     
@@ -17,6 +19,7 @@ def documents_list(request):
     
     return render(request, 'documents/documents_list.html', {'documents': documents})
 
+@login_required
 def documents_details(request, pk):
     document = get_object_or_404(Document, pk=pk)
     comments = Comment.objects.filter(document=document)
@@ -39,6 +42,7 @@ def documents_details(request, pk):
         'form': comment_form
     })
 
+@login_required
 def documents_upload(request):
     if request.method == 'POST':
         form = DocumentForm(request.POST, request.FILES)
