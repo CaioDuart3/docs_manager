@@ -138,3 +138,4 @@ def documents_download(request, pk):
         messages.error(request, f'Erro ao fazer download: {str(e)}')
         return redirect('documents_details', pk=pk)
     
+

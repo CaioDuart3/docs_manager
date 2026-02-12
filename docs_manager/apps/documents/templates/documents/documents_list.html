@@ -3,7 +3,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Document Manager</title>
+    <title>Lista de Documentos</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -11,6 +11,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="{% static 'css/global.css' %}" />
+    <script src="{% static 'documents/js/search.js' %}" defer></script>
   </head>
 
   <body>
@@ -73,17 +74,7 @@
           </a>
         </div>
         <!-- Barra de pesquisa -->
-        <form method="GET" action="" class="input-group">
-          <button
-            type="submit"
-            style="
-              all: unset;
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              cursor: pointer;
-            "
-          >
+        <div class="input-group">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="20"
@@ -106,14 +97,13 @@
                 stroke-linejoin="round"
               />
             </svg>
-          </button>
           <input
             type="text"
             name="search"
             placeholder="Buscador de documentos"
-            value="{{ request.GET.search }}"
+            id="search"
           />
-        </form>
+        </div>
 
         <p class="documents-count">
           {{ documents.count}} documento(s) encontrado(s).
@@ -127,7 +117,7 @@
                     <img src="{% static 'img/icon-document.svg' %}" alt="Thumbnail" />
                 </a>
               <div class="card-info-texts">
-                <a href="{% url 'documents_details' document.pk %}"><b>{{ document.title }}</b> publicado por <b>{{ document.author }}</b></a>
+                <a id="title-document" href="{% url 'documents_details' document.pk %}"><b>{{ document.title }}</b> publicado por <b>{{ document.author }}</b></a>
                 <div class="card-info-texts-details">
                   <p>{{document.file_extension}}</p>
                   <p>{{document.get_file_size_display}}</p>
