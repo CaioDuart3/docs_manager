@@ -42,7 +42,6 @@ db.sqlite3
 db.sqlite3-journal
 */media/
 */staticfiles/
-*/static/
 !*/static/.gitkeep
 *.pot
 *.sqlite3
@@ -84,3 +83,4 @@ dmypy.json
 # OS
 Thumbs.db
 .directory
+docs_manager\staticfiles
