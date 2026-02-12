@@ -1,10 +1,19 @@
+from django.conf import settings
 from django.db import models
+from django.contrib.auth.models import User
 import os
 
 # Create your models here.
 class Document(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True)
+    author = models.ForeignKey(
+    settings.AUTH_USER_MODEL,
+    on_delete=models.CASCADE,
+    null=True,
+    blank=True
+    )
+
     file = models.BinaryField(
         help_text="Arquivo armazenado no banco de dados"
     )
@@ -35,7 +44,7 @@ class Document(models.Model):
     
 class Comment(models.Model):
     document = models.ForeignKey(Document, related_name='comments', on_delete=models.CASCADE)
-    author = models.CharField(max_length=255)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     text = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 

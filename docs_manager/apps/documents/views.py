@@ -30,6 +30,7 @@ def documents_details(request, pk):
         if comment_form.is_valid():
             comment = comment_form.save(commit=False)
             comment.document = document
+            comment.author = request.user  # Atribua o objeto User diretamente
             comment.save()
             messages.success(request, 'Comentário adicionado com sucesso!')
             return redirect('documents_details', pk=document.pk)
@@ -41,7 +42,6 @@ def documents_details(request, pk):
         'comments': comments,
         'form': comment_form
     })
-
 @login_required
 def documents_upload(request):
     if request.method == 'POST':
@@ -52,6 +52,7 @@ def documents_upload(request):
                 document = Document()
                 document.title = form.cleaned_data['title']
                 document.description = form.cleaned_data['description']
+                document.author = request.user  # Atribua o objeto User diretamente
                 
                 # Ler o arquivo enviado e salvá-lo no banco como dados binários
                 if request.FILES.get('file'):
@@ -91,6 +92,7 @@ def documents_upload(request):
     
     return render(request, 'documents/documents_upload.html', {'form': form})
 
+@login_required
 def documents_delete(request, pk):
     document = get_object_or_404(Document, pk=pk)
     
@@ -105,6 +107,7 @@ def documents_delete(request, pk):
     
     return redirect('documents_list')
 
+@login_required
 def documents_download(request, pk):
     """Download do arquivo armazenado no banco"""
     document = get_object_or_404(Document, pk=pk)
@@ -118,3 +121,4 @@ def documents_download(request, pk):
     except Exception as e:
         messages.error(request, f'Erro ao fazer download: {str(e)}')
         return redirect('documents_details', pk=pk)
+    

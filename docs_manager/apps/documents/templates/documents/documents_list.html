@@ -23,7 +23,7 @@
 <ul>
     {% for document in documents %}
         <li style="margin-bottom: 20px; border-bottom: 1px solid #ccc; padding-bottom: 10px;">
-            <h2>{{ document.title }}</h2>
+            <h2>{{ document.title }} - {{document.author}}</h2>
             <p>Uploaded at: {{ document.uploaded_at }}</p>
             
             <!-- Número de comentários -->

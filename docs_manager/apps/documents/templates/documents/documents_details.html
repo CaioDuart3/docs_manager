@@ -5,7 +5,7 @@
 <h2>Comments</h2>
 <ul>
 {% for comment in document.comments.all %}
-    <li>{{ comment.text }} - {{ comment.created_at }}</li>
+    <li>{{ comment.text }} - {{ comment.created_at }} por {{ comment.author }}</li>
 {% empty %}
     <li>No comments yet.</li>
 {% endfor %}
