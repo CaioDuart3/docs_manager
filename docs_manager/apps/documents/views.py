@@ -9,8 +9,17 @@ import os
 def can_delete_document(user, document):
     """
     Verifica se um usuário tem permissão para deletar um documento.
-    - Administradores/staff podem deletar qualquer documento
-    - Usuários comuns só podem deletar seus próprios documentos
+
+    Regras:
+    - Usuários staff ou superuser podem deletar qualquer documento.
+    - Usuários comuns só podem deletar documentos que eles mesmos criaram.
+
+    Args:
+        user (User): Usuário que está tentando deletar o documento.
+        document (Document): Documento que se deseja deletar.
+
+    Returns:
+        bool: True se o usuário puder deletar, False caso contrário.
     """
     if user.is_staff or user.is_superuser:
         return True
@@ -18,6 +27,17 @@ def can_delete_document(user, document):
 
 @login_required
 def documents_list(request):
+    """
+    Exibe a lista de documentos, com opção de busca por título.
+
+    Permite filtrar os documentos usando o parâmetro GET 'search'.
+
+    Args:
+        request (HttpRequest): Objeto de requisição do Django.
+
+    Returns:
+        HttpResponse: Página renderizada com os documentos filtrados.
+    """
     documents = Document.objects.all()
     
     # Busca por título
@@ -33,6 +53,17 @@ def documents_list(request):
 
 @login_required
 def documents_details(request, pk):
+    """
+    Exibe os detalhes de um documento específico, incluindo comentários.
+    Permite adicionar novos comentários e verifica permissão para deletar.
+
+    Args:
+        request (HttpRequest): Objeto de requisição do Django.
+        pk (int): ID do documento a ser visualizado.
+
+    Returns:
+        HttpResponse: Página renderizada com detalhes do documento e comentários.
+    """
     document = get_object_or_404(Document, pk=pk)
     comments = Comment.objects.filter(document=document)
     comment_form = CommentForm()
@@ -45,7 +76,7 @@ def documents_details(request, pk):
         if comment_form.is_valid():
             comment = comment_form.save(commit=False)
             comment.document = document
-            comment.author = request.user  # Atribua o objeto User diretamente
+            comment.author = request.user
             comment.save()
             messages.success(request, 'Comentário adicionado com sucesso!')
             return redirect('documents_details', pk=document.pk)
@@ -58,14 +89,25 @@ def documents_details(request, pk):
         'form': comment_form,
         'can_delete': can_delete
     })
+
 @login_required
 def documents_upload(request):
+    """
+    Permite o upload de novos documentos.
+
+    Processa o formulário de upload, salva metadados do arquivo (nome, tamanho, tipo, extensão)
+    e armazena o documento no banco de dados. Mensagens de sucesso ou erro são exibidas.
+
+    Args:
+        request (HttpRequest): Objeto de requisição do Django.
+
+    Returns:
+        HttpResponse: Página de upload com formulário.
+    """
     if request.method == 'POST':
         form = DocumentForm(request.POST, request.FILES)
         if form.is_valid():
             try:
-                # Salvar o formulário (Django cuida de salvar o arquivo na pasta local)
-                print("Salvando documento...")
                 document = form.save(commit=False)
                 document.author = request.user
                 
@@ -77,7 +119,6 @@ def documents_upload(request):
                     document.file_type = file_obj.content_type
                     document.file_extension = os.path.splitext(file_obj.name)[1].lower()
                 
-                # Salvar no banco de dados
                 document.save()
                 
                 messages.success(
@@ -91,7 +132,6 @@ def documents_upload(request):
                 print(f"Erro no upload: {e}")
         else:
             print("Formulário inválido:", form.errors)
-            # Mostrar erros de validação
             for field, errors in form.errors.items():
                 for error in errors:
                     messages.error(request, f'{field}: {error}')
@@ -102,6 +142,16 @@ def documents_upload(request):
 
 @login_required
 def documents_delete(request, pk):
+    """
+    Deleta um documento específico, caso o usuário tenha permissão.
+
+    Args:
+        request (HttpRequest): Objeto de requisição do Django.
+        pk (int): ID do documento a ser deletado.
+
+    Returns:
+        HttpResponse: Redireciona para a lista de documentos após a deleção.
+    """
     document = get_object_or_404(Document, pk=pk)
     
     # Verificar permissão
@@ -125,11 +175,20 @@ def documents_delete(request, pk):
 
 @login_required
 def documents_download(request, pk):
-    """Download do arquivo armazenado em pasta local"""
+    """
+    Permite o download de um documento armazenado na pasta local.
+
+    Args:
+        request (HttpRequest): Objeto de requisição do Django.
+        pk (int): ID do documento a ser baixado.
+
+    Returns:
+        FileResponse: Arquivo do documento para download.
+        Redireciona para os detalhes do documento em caso de erro.
+    """
     document = get_object_or_404(Document, pk=pk)
     
     try:
-        # Abrir arquivo da pasta local
         response = FileResponse(document.file.open('rb'), as_attachment=True)
         response['Content-Disposition'] = f'attachment; filename="{document.file_name}"'
         response['Content-Type'] = document.file_type or 'application/octet-stream'
@@ -137,5 +196,3 @@ def documents_download(request, pk):
     except Exception as e:
         messages.error(request, f'Erro ao fazer download: {str(e)}')
         return redirect('documents_details', pk=pk)
-    
-

@@ -22,6 +22,7 @@
         <button type="submit">Sair da conta</button>
       </form>
 
+
       <div class="container">
         <div class="container-title-upload">
           <div>
@@ -73,6 +74,7 @@
             </div>
           </a>
         </div>
+
         <!-- Barra de pesquisa -->
         <div class="input-group">
             <svg
@@ -109,6 +111,7 @@
           {{ documents.count}} documento(s) encontrado(s).
         </p>
 
+        <!-- lista de cards dos documentos -->
         <div class="container-cards-document">
           {% for document in documents %}
           <div class="card-document">
@@ -268,7 +271,6 @@
                 </svg>
                 <p>{{ document.comments.count }}</p>
               </div>
-              <!-- Botões de ação -->
             </div>
           </div>
 

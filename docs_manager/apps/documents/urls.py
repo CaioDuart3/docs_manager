@@ -9,4 +9,7 @@ urlpatterns = [
     path('<int:pk>/', views.documents_details, name='documents_details'),
     path('<int:pk>/delete/', views.documents_delete, name='documents_delete'),
     path('<int:pk>/download/', views.documents_download, name='documents_download'),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] 
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

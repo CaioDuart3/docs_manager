@@ -182,11 +182,6 @@
         <h3 class="title-container-details">Visualização do Documento</h3>
         {% if document.file_extension|lower == '.pdf' %}
             <a href="{{ document.file.url }}" target="_blank" style="color: #4F39F6">Clique aqui pra visualizar o pdf em outra janela</a>
-            <!-- <iframe 
-                src="{{ document.file.url }}" 
-                type="application/pdf"
-                style="width: 100%; height: 600px; border: none; border-radius: 8px; border: solid 1px #101828;">
-            </iframe> -->
              <embed src="{{ document.file.url }}" type="application/pdf" width="100%" height="600px" />
         {% elif document.file_extension|lower == '.png' %}
             <img src="{{ document.file.url }}" alt="Visualização do Documento" style="max-width: 100%; height: auto; border-radius: 8px; border: solid 1px #101828;">
