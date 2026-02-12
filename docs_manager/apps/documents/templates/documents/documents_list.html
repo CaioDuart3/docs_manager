@@ -14,7 +14,7 @@
   </head>
 
   <body>
-    <div style="display: flex; flex-direction: column; gap: 16px; width: auto; width: 100%; max-width: 1200px; margin: 0 auto; padding: 16px;">
+    <div class="page">
       <!-- logout -->
       <form class="logout-button" method="post" action="{% url 'logout' %}">
         {% csrf_token %}
@@ -123,9 +123,11 @@
           {% for document in documents %}
           <div class="card-document">
             <div class="card-info">
-              <img src="{% static 'img/icon-document.svg' %}" alt="Thumbnail" />
+                <a href="{% url 'documents_details' document.pk %}">
+                    <img src="{% static 'img/icon-document.svg' %}" alt="Thumbnail" />
+                </a>
               <div class="card-info-texts">
-                <p><b>{{ document.title }}</b> publicado por <b>{{ document.author }}</b></p>
+                <a href="{% url 'documents_details' document.pk %}"><b>{{ document.title }}</b> publicado por <b>{{ document.author }}</b></a>
                 <div class="card-info-texts-details">
                   <p>{{document.file_extension}}</p>
                   <p>{{document.get_file_size_display}}</p>
@@ -193,7 +195,8 @@
                 </svg>
               </a>
 
-              <!-- Botão de exclusão -->
+              <!-- Botão de exclusão - Apenas se o usuário tiver permissão -->
+              {% if document.author == current_user or current_user.is_staff or current_user.is_superuser %}
               <form
                 method="POST"
                 action="{% url 'documents_delete' document.pk %}"
@@ -205,7 +208,7 @@
                   style="all: unset; cursor: pointer"
                   onclick="
                     return confirm(
-                      'Are you sure you want to delete this document?',
+                      'Tem certeza que deseja deletar este documento?',
                     );
                   "
                 >
@@ -254,6 +257,7 @@
                   </svg>
                 </button>
               </form>
+              {% endif %}
 
               <!-- Número de comentários -->
               <div class="icon-comments-counts">

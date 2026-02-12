@@ -15,7 +15,7 @@
   </head>
   <body>
     
-    <div style="display: flex; flex-direction: column; gap: 16px; width: auto; width: 100%; max-width: 1200px; margin: 0 auto; padding: 16px;">
+    <div class="page">
 
         <a class="back-button" href="{% url 'documents_list' %}">
       <svg
@@ -94,7 +94,8 @@
                 <p>Download</p>
               </div>
             </a>
-            <!-- Botão de exclusão -->
+            <!-- Botão de exclusão - Apenas se o usuário tiver permissão -->
+            {% if can_delete %}
             <form
               method="POST"
               action="{% url 'documents_delete' document.pk %}"
@@ -106,7 +107,7 @@
                 class="buttons-details-delete"
                 onclick="
                   return confirm(
-                    'Are you sure you want to delete this document?',
+                    'Tem certeza que deseja deletar este documento?',
                   );
                 "
               >
@@ -156,6 +157,7 @@
                 <p>Excluir</p>
               </button>
             </form>
+            {% endif %}
           </div>
         </div>
         <div style="display: flex; flex-direction: column; gap: 12px;">
@@ -178,7 +180,20 @@
       <!-- visualização do documento -->
       <div class="container">
         <h3 class="title-container-details">Visualização do Documento</h3>
-        <!-- Exibir o documento, por exemplo, usando um iframe para PDFs ou um link para outros tipos de arquivos -->
+        {% if document.file_extension|lower == '.pdf' %}
+            <!-- <iframe 
+                src="{{ document.file.url }}" 
+                type="application/pdf"
+                style="width: 100%; height: 600px; border: none; border-radius: 8px; border: solid 1px #101828;">
+            </iframe> -->
+             <embed src="{{ document.file.url }}" type="application/pdf" width="100%" height="600px" />
+        {% elif document.file_extension|lower == '.png' %}
+            <img src="{{ document.file.url }}" alt="Visualização do Documento" style="max-width: 100%; height: auto; border-radius: 8px; border: solid 1px #101828;">
+        {% elif document.file_extension|lower == '.jpg' or document.file_extension|lower == '.jpeg' %}
+            <img src="{{ document.file.url }}" alt="Visualização do Documento" style="max-width: 100%; height: auto; border-radius: 8px; border: solid 1px #101828;">
+        {% else %}
+            <p>Visualização não disponível para este tipo de arquivo.</p>
+        {% endif %}
       </div>
 
       <!-- seção de comentários -->
@@ -279,4 +294,5 @@
       </div>
     </div>
   </body>
+  
 </html>

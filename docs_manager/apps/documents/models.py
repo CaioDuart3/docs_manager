@@ -33,6 +33,12 @@ class Document(models.Model):
     def __str__(self):
         return self.title
     
+    def can_be_deleted_by(self, user):
+        """Verifica se um usuário pode deletar este documento"""
+        if user.is_staff or user.is_superuser:
+            return True
+        return self.author == user
+    
     def get_file_size_display(self):
         """Retorna o tamanho do arquivo em formato legível"""
         size = self.file_size

@@ -1,10 +1,20 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from django.http import FileResponse
+from django.http import FileResponse, Http404
 from .models import Document, Comment
 from .forms import DocumentForm, CommentForm
 from django.contrib.auth.decorators import login_required
 import os
+
+def can_delete_document(user, document):
+    """
+    Verifica se um usuário tem permissão para deletar um documento.
+    - Administradores/staff podem deletar qualquer documento
+    - Usuários comuns só podem deletar seus próprios documentos
+    """
+    if user.is_staff or user.is_superuser:
+        return True
+    return document.author == user
 
 @login_required
 def documents_list(request):
@@ -16,13 +26,19 @@ def documents_list(request):
     if search:
         documents = documents.filter(title__icontains=search)
     
-    return render(request, 'documents/documents_list.html', {'documents': documents})
+    return render(request, 'documents/documents_list.html', {
+        'documents': documents,
+        'current_user': request.user
+    })
 
 @login_required
 def documents_details(request, pk):
     document = get_object_or_404(Document, pk=pk)
     comments = Comment.objects.filter(document=document)
     comment_form = CommentForm()
+    
+    # Verificar permissão para deletar
+    can_delete = can_delete_document(request.user, document)
     
     if request.method == 'POST':
         comment_form = CommentForm(request.POST)
@@ -39,7 +55,8 @@ def documents_details(request, pk):
     return render(request, 'documents/documents_details.html', {
         'document': document,
         'comments': comments,
-        'form': comment_form
+        'form': comment_form,
+        'can_delete': can_delete
     })
 @login_required
 def documents_upload(request):
@@ -86,6 +103,11 @@ def documents_upload(request):
 @login_required
 def documents_delete(request, pk):
     document = get_object_or_404(Document, pk=pk)
+    
+    # Verificar permissão
+    if not can_delete_document(request.user, document):
+        messages.error(request, 'Você não tem permissão para deletar este documento. Apenas o autor ou administradores podem deletá-lo.')
+        return redirect('documents_details', pk=pk)
     
     if request.method == 'POST':
         try:
