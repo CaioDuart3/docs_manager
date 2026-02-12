@@ -1,0 +1,617 @@
+/* ================================
+   VARIÁVEIS GLOBAIS
+================================ */
+
+:root {
+    /* Cores */
+    
+    --color-bg-page: #E8EAF6;
+    --color-white: #FFFFFF;
+    --color-text-title: #101828;
+    --color-text-subtitle: #4A5565;
+    --color-border: #E5E7EB;
+    --color-primary: #4F39F6;
+    --color-primary-soft: #E8EAF6;
+
+    /* Tipografia */
+    --font-base: "Arimo", sans-serif;
+
+    /* Espaçamentos */
+    --space-xs: 8px;
+    --space-sm: 16px;
+    --space-md: 24px;
+    --space-lg: 32px;
+
+    /* Bordas */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+
+    /* Sombras */
+    --shadow-card: 
+        0 10px 15px -3px rgba(0,0,0,.1),
+        0 4px 6px -2px rgba(0,0,0,.05);
+}
+
+/* ================================
+   RESET
+================================ */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+}
+
+
+
+body {
+    min-height: 100vh;
+    font-family: var(--font-base);
+    background: var(--color-bg-page);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--space-lg);
+    flex-direction: column;
+}
+
+a {
+    all: unset;
+    cursor: pointer;
+}
+
+
+
+
+
+/* Input de arquivo minimalista estilizado */
+input[type="file"] {
+    width: 100%;
+    padding: 10px 15px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+    background-color: #f9f9f9;
+    color: #333;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+
+.page{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: auto;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 16px;
+}
+
+
+
+/* ================================
+   CONTAINER
+================================ */
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    background: var(--color-white);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    box-shadow: var(--shadow-card);
+}
+
+/* ================================
+   TÍTULOS
+================================ */
+
+h1 {
+    font-size: 1.875rem;
+    font-weight: 400;
+    color: var(--color-text-title);
+}
+
+h2 {
+    font-size: 1rem;
+    color: var(--color-text-subtitle);
+}
+
+/* ================================
+   INPUT / BUSCA
+================================ */
+
+
+.label-input {
+    display: block;
+    margin-bottom: var(--space-xs);
+    font-size: 0.875rem;
+    color: var(--color-text-subtitle);
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: var(--space-xs) var(--space-sm);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+}
+
+.input-group input {
+    flex: 1;
+    border: none;
+    font-size: 1rem;
+    background: transparent;
+}
+
+.input-group input:focus {
+    outline: none;
+}
+
+/* ================================
+   LOGIN
+================================ */
+
+.container-logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Card de login */
+.container-login {
+    width: 100%;
+    max-width: 420px;
+    background: var(--color-white);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    box-shadow: var(--shadow-card);
+}
+
+/* Logo */
+.container-login img {
+    align-self: center;
+}
+
+/* Títulos */
+.container-login h1 {
+    text-align: center;
+}
+
+.container-login h2 {
+    text-align: center;
+    font-size: 0.95rem;
+}
+
+/* Formulário */
+.form-login {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+/* Inputs */
+.form-login .input-group {
+    height: 44px;
+}
+
+/* Botão */
+.button-login {
+    height: 44px;
+    border-radius: var(--radius-md);
+    background: var(--color-primary);
+    color: var(--color-white);
+    font-size: 1rem;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: filter 0.2s ease;
+}
+
+.button-login:hover {
+    filter: brightness(0.95);
+}
+
+.button-login:active {
+    filter: brightness(0.9);
+}
+
+
+
+/* ================================
+   HEADER + UPLOAD
+================================ */
+
+.container-title-upload {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+}
+
+.container-title-upload > div {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+}
+
+.container-title{
+    display: flex;
+height: 60px;
+flex-direction: column;
+align-items: flex-start;
+flex: 1 0 0;
+}
+.button {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: 10px 20px;
+    border-radius: var(--radius-md);
+    background: var(--color-primary);
+    color: var(--color-white);
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+/* ================================
+   LISTA DE DOCUMENTOS
+================================ */
+
+.logout-button {
+    display: inline-flex;           /* flex para alinhar o texto */
+    align-items: center;            /* centraliza verticalmente */
+    justify-content: flex-start;    /* alinhado à esquerda do container */
+    gap: 8px;                       /* se você quiser ícone depois, mantém espaço */
+    width: 100%;                    /* ocupa toda a largura disponível */
+    background-color: transparent;  /* sem fundo */
+    color: #4A5565;
+    border: none;                   /* remove borda padrão do botão */
+    text-decoration: none;          /* remove sublinhado se houver link */
+    font-family: Arimo, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    cursor: pointer;                /* mostra que é clicável */
+    padding: 0;                     /* remove padding padrão */
+}
+
+.logout-button button {
+    all: unset;                     /* remove estilo padrão do botão */
+    display: inline-flex;            /* para manter o flex dentro do form */
+    align-items: center;
+    width: 100%;
+    cursor: pointer;
+    gap: 8px;
+}
+
+
+
+.documents-count {
+    color: var(--color-text-subtitle);
+    font-size: 1rem;
+}
+
+
+.container-cards-document{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+/* Card */
+.card-document {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-sm);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    flex-wrap: wrap;
+}
+
+/* Info esquerda */
+.card-info {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    flex: 1;
+    min-width: 240px;
+}
+
+.card-info-texts {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;         
+    min-width: 0;     
+}
+
+
+.card-info-texts h3 {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.card-info-texts div {
+    display: flex;
+    flex-direction: row; 
+    align-items: center; 
+    gap: var(--space-sm);
+    font-size: 0.875rem;
+    color: var(--color-text-subtitle);
+}
+
+
+/* Ícones direita */
+.card-icons {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    flex-wrap: wrap;
+}
+
+/* Comentários */
+.icon-comments-counts {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 0 12px;
+    height: 36px;
+    border-radius: var(--radius-sm);
+    background: var(--color-primary-soft);
+}
+
+.icon-comments-counts p {
+    color: var(--color-primary);
+    font-size: 0.875rem;
+}
+
+/* ================================
+   DETALHES – DOCUMENTO
+================================ */
+
+.back-button {
+    display: inline-flex;          /* flex para alinhar ícone e texto */
+    align-items: center;           /* centraliza verticalmente SVG e texto */
+    justify-content: flex-start;   /* alinha à esquerda do container */
+    gap: 8px;                      /* espaço entre SVG e texto */
+    width: 100%;                   /* ocupa toda a largura do container */
+    background-color: transparent; /* sem fundo */
+    color: #4A5565;
+    text-decoration: none;         /* remove sublinhado do link */
+    font-family: Arimo, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+.back-button svg {
+    display: block;                /* remove espaço extra abaixo do SVG */
+    stroke: currentColor;          /* herda a cor do texto */
+}
+
+
+/* Ações (download / excluir) */
+.card-icons {
+    display: flex;
+    gap: var(--space-sm);
+    align-items: center;
+}
+
+.buttons-details-download,
+.buttons-details-delete {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 37px;
+    padding: 0 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: filter 0.2s ease, transform 0.1s ease;
+}
+
+.buttons-details-download {
+    background: #F3F4F6;
+}
+
+.buttons-details-delete {
+    background: #FEE;
+    border: none;
+}
+
+.buttons-details-download:hover,
+.buttons-details-delete:hover {
+    filter: brightness(0.95);
+}
+
+.buttons-details-download:active,
+.buttons-details-delete:active {
+    transform: scale(0.98);
+}
+
+.buttons-details-download p {
+    color: var(--color-text-subtitle);
+    font-size: 14px;
+}
+
+.buttons-details-delete p {
+    color: #E7000B;
+    font-size: 14px;
+}
+
+/* Textos de detalhes */
+.subtitle-details {
+    color: var(--color-text-subtitle);
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.text-details {
+    color: var(--color-text-title);
+    font-size: 14px;
+    line-height: 22px;
+    max-width: 100%;
+    word-break: break-word;
+}
+
+/* Título das seções */
+.title-container-details {
+    color: var(--color-text-title);
+    font-size: 18px;
+    font-weight: 400;
+}
+
+/* ================================
+   COMENTÁRIOS
+================================ */
+
+.text-field-comments,
+textarea {
+    width: 100%;
+    min-height: 96px;
+    padding: 16px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+    font-family: var(--font-base);
+    font-size: 14px;
+    resize: vertical;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+}
+
+.button-details-comment {
+    margin-top: var(--space-sm);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-radius: 10px;
+    background: var(--color-primary);
+    color: var(--color-white);
+    border: none;
+    cursor: pointer;
+    transition: filter 0.2s ease;
+}
+
+.button-details-comment:hover {
+    filter: brightness(0.95);
+}
+
+.list-comments{
+    display: flex;
+height: 173px;
+flex-direction: column;
+align-items: flex-start;
+gap: 16px;
+align-self: stretch;
+}
+
+.card-comments{
+    display: flex;
+height: 47px;
+align-items: flex-start;
+gap: 16px;
+flex-shrink: 0;
+align-self: stretch;
+}
+
+.profile{
+    display: flex;
+width: 40px;
+height: 40px;
+padding-right: 0.012px;
+justify-content: center;
+align-items: center;
+border-radius: 26843500px;
+background: #E8EAF6;
+}
+
+.comment-details{
+display: flex;
+padding-right: 867.238px;
+align-items: flex-end;
+gap: 8px;
+align-self: stretch;
+}
+
+.comment-text{
+color: #4A5565;
+font-family: Arimo;
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: 22px;
+}
+/* ================================
+   RESPONSIVIDADE documents_list.html
+================================ */
+
+@media (max-width: 768px) {
+    body {
+        padding: var(--space-md);
+    }
+
+    .container {
+        padding: var(--space-md);
+    }
+
+    .container-title-upload {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .upload {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .card-document {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .card-icons {
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 0;
+    }
+
+    .container {
+        border-radius: 0;
+        min-height: 100vh;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+}

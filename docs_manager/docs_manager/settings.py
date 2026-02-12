@@ -136,3 +136,4 @@ else:
 
 LOGOUT_REDIRECT_URL = 'login'
 LOGIN_REDIRECT_URL = 'documents_list'
+

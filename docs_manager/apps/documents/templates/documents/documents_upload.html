@@ -1,22 +1,80 @@
-<h1>Upload Document</h1>
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    <div class="form-group">
-        <label for="id_title">Título</label>
-        {{ form.title }}
-    </div>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'users/login.css' %}">
+    <link rel="stylesheet" href="{% static 'css/global.css' %}">
+    <title>Upload Document</title>
+</head>
+<body>
+<div class="page">
+
+    <a class="back-button" href="{% url 'documents_list' %}">
+        <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="20"
+        height="20"
+        viewBox="0 0 20 20"
+        fill="none"
+        >
+        <path
+        d="M9.99996 15.8334L4.16663 10L9.99996 4.16669"
+        stroke="#4A5565"
+        stroke-width="1.66667"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        />
+        <path
+        d="M15.8333 10H4.16663"
+        stroke="#4A5565"
+          stroke-width="1.66667"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          />
+        </svg>
+        Voltar para documentos
+    </a>
     
-    <div class="form-group">
-        <label for="id_description">Descrição</label>
-        {{ form.description }}
+    <div class="container-login">
+        <h1>Sistema de Documentos</h1>
+        <h2>Envie seus documentos de até 50mb</h2>
+        
+        <form method="POST" enctype="multipart/form-data" class="form-login">
+            {% csrf_token %}
+            
+            <div>
+                <label for="id_title" class="label-input">Título</label>
+                <div class="input-group">
+                    {{ form.title }}
+                </div>
+            </div>
+            
+            <div>
+                <label for="id_description" class="label-input">Descrição</label>
+                <div >
+                    {{ form.description }}
+                </div>
+            </div>
+            
+            <div >
+                <label for="id_file" class="label-input">Arquivo</label>
+                <input
+                type="file"
+                name="file"
+                id="id_file"
+                class="form-control"
+                accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.jpg,.png,.gif,.zip"
+                required
+                />
+            </div>
+            
+            <button type="submit" class="button-login">Upload</button>
+        </form>
+        
     </div>
+</div>
     
-    <div class="form-group">
-        <label for="id_file">Arquivo</label>
-        <input type="file" name="file" id="id_file" class="form-control" 
-               accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.jpg,.png,.gif,.zip" required>
-    </div>
-    
-    <button type="submit" class="btn btn-primary">Upload</button>
-</form>
-<a href="{% url 'documents_list' %}">Back</a>
+</body>
+</html>

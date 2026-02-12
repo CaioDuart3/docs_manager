@@ -1,20 +1,298 @@
-<h1>{{ document.title }}</h1>
-<p>{{ document.description }}</p>
-<a href="{{ document.file.url }}" target="_blank">Download</a>
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'css/global.css' %}" />
+    <title>Document</title>
+  </head>
+  <body>
+    
+    <div class="page">
 
-<h2>Comments</h2>
-<ul>
-{% for comment in document.comments.all %}
-    <li>{{ comment.text }} - {{ comment.created_at }} por {{ comment.author }}</li>
-{% empty %}
-    <li>No comments yet.</li>
-{% endfor %}
-</ul>
+        <a class="back-button" href="{% url 'documents_list' %}">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="20"
+        height="20"
+        viewBox="0 0 20 20"
+        fill="none"
+      >
+        <path
+          d="M9.99996 15.8334L4.16663 10L9.99996 4.16669"
+          stroke="#4A5565"
+          stroke-width="1.66667"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M15.8333 10H4.16663"
+          stroke="#4A5565"
+          stroke-width="1.66667"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+        Voltar para documentos
+    </a>
 
-<h3>Add Comment</h3>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Add Comment</button>
-</form>
-<a href="{% url 'documents_list' %}">Back</a>
+
+
+      <div class="container">
+        <div style="display: flex; flex-direction: row">
+          <div class="card-info">
+            <img src="{% static 'img/icon-document.svg' %}" alt="Thumbnail" />
+            <div class="card-info-texts">
+              <h3>{{ document.title }}</h3>
+              <div class="card-info-texts-details">
+                <p>{{document.file_extension}}</p>
+                <p>{{document.get_file_size_display}}</p>
+                <p>{{ document.uploaded_at|date:"d/m/Y H:i" }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="card-icons">
+            <!-- icone de baixar -->
+            <a href="{{ document.file.url }}" download>
+              <div class="buttons-details-download">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                >
+                  <path
+                    d="M10 12.5V2.5"
+                    stroke="#4A5565"
+                    stroke-width="1.66667"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M17.5 12.5V15.8333C17.5 16.2754 17.3244 16.6993 17.0118 17.0118C16.6993 17.3244 16.2754 17.5 15.8333 17.5H4.16667C3.72464 17.5 3.30072 17.3244 2.98816 17.0118C2.67559 16.6993 2.5 16.2754 2.5 15.8333V12.5"
+                    stroke="#4A5565"
+                    stroke-width="1.66667"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M5.83337 8.33337L10 12.5L14.1667 8.33337"
+                    stroke="#4A5565"
+                    stroke-width="1.66667"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <p>Download</p>
+              </div>
+            </a>
+            <!-- Botão de exclusão - Apenas se o usuário tiver permissão -->
+            {% if can_delete %}
+            <form
+              method="POST"
+              action="{% url 'documents_delete' document.pk %}"
+              style="display: inline"
+            >
+              {% csrf_token %}
+              <button
+                type="submit"
+                class="buttons-details-delete"
+                onclick="
+                  return confirm(
+                    'Tem certeza que deseja deletar este documento?',
+                  );
+                "
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                >
+                  <path
+                    d="M8.33337 9.16663V14.1666"
+                    stroke="#E7000B"
+                    stroke-width="1.66667"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M11.6666 9.16663V14.1666"
+                    stroke="#E7000B"
+                    stroke-width="1.66667"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M15.8333 5V16.6667C15.8333 17.1087 15.6577 17.5326 15.3451 17.8452C15.0326 18.1577 14.6087 18.3333 14.1666 18.3333H5.83329C5.39127 18.3333 4.96734 18.1577 4.65478 17.8452C4.34222 17.5326 4.16663 17.1087 4.16663 16.6667V5"
+                    stroke="#E7000B"
+                    stroke-width="1.66667"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M2.5 5H17.5"
+                    stroke="#E7000B"
+                    stroke-width="1.66667"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M6.66663 4.99996V3.33329C6.66663 2.89127 6.84222 2.46734 7.15478 2.15478C7.46734 1.84222 7.89127 1.66663 8.33329 1.66663H11.6666C12.1087 1.66663 12.5326 1.84222 12.8451 2.15478C13.1577 2.46734 13.3333 2.89127 13.3333 3.33329V4.99996"
+                    stroke="#E7000B"
+                    stroke-width="1.66667"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <p>Excluir</p>
+              </button>
+            </form>
+            {% endif %}
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+            <div>
+            {% if document.description %}
+                <h3 class="subtitle-details">Descrição</h3>
+                <p class="text-details">{{ document.description }}</p>
+            {% else %}
+                <h3 class="subtitle-details">Sem descrição</h3>
+            {% endif %}
+
+            </div>
+          <div>
+              <h3 class="subtitle-details">Publicado por</h3>
+              <p class="text-details">{{ document.author }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- visualização do documento -->
+      <div class="container">
+        <h3 class="title-container-details">Visualização do Documento</h3>
+        {% if document.file_extension|lower == '.pdf' %}
+            <!-- <iframe 
+                src="{{ document.file.url }}" 
+                type="application/pdf"
+                style="width: 100%; height: 600px; border: none; border-radius: 8px; border: solid 1px #101828;">
+            </iframe> -->
+             <embed src="{{ document.file.url }}" type="application/pdf" width="100%" height="600px" />
+        {% elif document.file_extension|lower == '.png' %}
+            <img src="{{ document.file.url }}" alt="Visualização do Documento" style="max-width: 100%; height: auto; border-radius: 8px; border: solid 1px #101828;">
+        {% elif document.file_extension|lower == '.jpg' or document.file_extension|lower == '.jpeg' %}
+            <img src="{{ document.file.url }}" alt="Visualização do Documento" style="max-width: 100%; height: auto; border-radius: 8px; border: solid 1px #101828;">
+        {% else %}
+            <p>Visualização não disponível para este tipo de arquivo.</p>
+        {% endif %}
+      </div>
+
+      <!-- seção de comentários -->
+      <div class="container">
+        <h3 class="title-container-details">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            fill="none"
+          >
+            <path
+              d="M18.3333 14.1667C18.3333 14.6087 18.1577 15.0326 17.8451 15.3452C17.5326 15.6577 17.1087 15.8333 16.6666 15.8333H5.68996C5.24797 15.8334 4.82411 16.0091 4.51163 16.3217L2.67663 18.1567C2.59388 18.2394 2.48846 18.2957 2.3737 18.3186C2.25894 18.3414 2.13999 18.3297 2.03188 18.2849C1.92378 18.2401 1.83138 18.1643 1.76636 18.067C1.70135 17.9697 1.66664 17.8553 1.66663 17.7383V4.16667C1.66663 3.72464 1.84222 3.30072 2.15478 2.98816C2.46734 2.67559 2.89127 2.5 3.33329 2.5H16.6666C17.1087 2.5 17.5326 2.67559 17.8451 2.98816C18.1577 3.30072 18.3333 3.72464 18.3333 4.16667V14.1667Z"
+              stroke="#5D5FEF"
+              stroke-width="1.66667"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          Comentários ({{ document.comments.count }})
+        </h3>
+        <form method="post">
+          {% csrf_token %} {{ form.text }}
+          <button type="submit" class="button-details-comment">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+            >
+              <g clip-path="url(#clip0_4_511)">
+                <path
+                  d="M9.6907 14.4573C9.71603 14.5205 9.76006 14.5743 9.81688 14.6117C9.87371 14.6491 9.9406 14.6682 10.0086 14.6664C10.0766 14.6647 10.1424 14.6422 10.1973 14.6019C10.2521 14.5617 10.2933 14.5057 10.3154 14.4413L14.6487 1.77466C14.67 1.71559 14.6741 1.65167 14.6604 1.59037C14.6468 1.52907 14.6159 1.47293 14.5715 1.42852C14.5271 1.3841 14.471 1.35326 14.4097 1.33959C14.3484 1.32592 14.2844 1.32999 14.2254 1.35133L1.5587 5.68466C1.49436 5.70673 1.43832 5.74794 1.39808 5.80278C1.35785 5.85761 1.33535 5.92344 1.33361 5.99144C1.33186 6.05943 1.35096 6.12632 1.38834 6.18315C1.42571 6.23997 1.47958 6.284 1.5427 6.30933L6.82937 8.42933C6.99649 8.49624 7.14833 8.5963 7.27574 8.72348C7.40315 8.85066 7.50349 9.00233 7.5707 9.16933L9.6907 14.4573Z"
+                  stroke="white"
+                  stroke-width="1.33333"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M14.5692 1.43127L7.27588 8.72394"
+                  stroke="white"
+                  stroke-width="1.33333"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </g>
+              <defs>
+                <clipPath id="clip0_4_511">
+                  <rect width="16" height="16" fill="white" />
+                </clipPath>
+              </defs>
+            </svg>
+            Adicionar Comentário
+          </button>
+        </form>
+
+        <!-- Listar comentários existentes -->
+        <div class="list-commments">
+          {% for comment in document.comments.all %}
+          <div class="card-comments">
+            <div class="profile">{{ comment.author.username | first |upper }}</div>
+            <div>
+              <div class="comment-details">
+                <p
+                  style="
+                    color: #101828;
+                    font-family: Arimo;
+                    font-size: 14px;
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: 22px;
+                  "
+                >
+                  {{ comment.author }}
+                </p>
+                <p
+                  style="
+                    color: #6a7282;
+                    font-family: Arimo;
+                    font-size: 12px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 18px;
+                  "
+                >
+                  {{ comment.created_at|date:"d/m/Y H:i" }}
+                </p>
+              </div>
+              <p class="comment-text">{{ comment.text }}</p>
+            </div>
+          </div>
+          {% empty %}
+          <p>Sem comentários ainda.</p>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </body>
+  
+</html>
