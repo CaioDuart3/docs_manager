@@ -1,6 +1,6 @@
 # 🚀 Docs Manager
 
-> Gestão inteligente de documentos: controle total sobre arquivos de qualquer extensão com uma camada colaborativa de comentários e gestão de privilégios de acesso
+> Gestão inteligente de documentos: controle sobre arquivos com uma camada colaborativa de comentários e gestão de privilégios de acesso
 
 <div align="center">
     <img width=200px src="docs_manager\static\img\logotipo_fundo.svg"/>
