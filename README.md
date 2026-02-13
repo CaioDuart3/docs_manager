@@ -163,5 +163,9 @@ Usuários comuns possuem acesso mais limitado. Eles podem:
 
 ---
 
+⚠️ Atenção: Este site foi para produção com ferramentas 100% gratuitas, como Koyeb e Supabase. Por isso, o desempenho pode ser limitado devido às restrições de hardware dos planos gratuitos. Agradeço sua paciência e compreensão!
 
-**Desenvolvido com ☕ por **Caio Duarte**
+---
+
+
+> Desenvolvido com ☕ por **Caio Duarte**
