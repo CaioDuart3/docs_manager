@@ -8,7 +8,7 @@
     --color-text-title: #101828;
     --color-text-subtitle: #4A5565;
     --color-border: #E5E7EB;
-    --color-primary: #4F39F6;
+    --color-primary: linear-gradient(135deg, #155DFC 0%, #1447E6 100%);
     --color-primary-soft: #E8EAF6;
 
     /* Tipografia */
