@@ -172,7 +172,13 @@
             </div>
           <div>
               <h3 class="subtitle-details">Publicado por</h3>
-              <p class="text-details">{{ document.author }}</p>
+              <p class="text-details">
+                {% if document.author.first_name and document.author.last_name %}
+                    {{ document.author.first_name }} {{ document.author.last_name }}
+                {% else %}
+                    {{ document.author.username }}
+                {% endif %}
+              </p>
           </div>
         </div>
       </div>
@@ -182,7 +188,6 @@
         <h3 class="title-container-details">Visualização do Documento</h3>
         {% if document.file_extension|lower == '.pdf' %}
             <a href="{{ document.file.url }}" target="_blank" style="color: #4F39F6">Clique aqui pra visualizar o pdf em outra janela</a>
-             <embed src="{{ document.file.url }}" type="application/pdf" width="100%" height="600px" />
         {% elif document.file_extension|lower == '.png' %}
             <img src="{{ document.file.url }}" alt="Visualização do Documento" style="max-width: 100%; height: auto; border-radius: 8px; border: solid 1px #101828;">
         {% elif document.file_extension|lower == '.jpg' or document.file_extension|lower == '.jpeg' %}
@@ -252,7 +257,13 @@
         <div class="list-commments">
           {% for comment in document.comments.all %}
           <div class="card-comments">
-            <div class="profile">{{ comment.author.username | first |upper }}</div>
+            <div class="profile">
+                {% if comment.author.first_name and comment.author.last_name %}
+                    {{ comment.author.first_name | first |upper }}
+                {% else %}
+                    {{ comment.author.username | first |upper }}
+                {% endif %}
+            </div>
             <div>
               <div class="comment-details">
                 <p
@@ -265,7 +276,11 @@
                     line-height: 22px;
                   "
                 >
-                  {{ comment.author }}
+                  {% if comment.author.first_name and comment.author.last_name %}
+                    {{ comment.author.first_name }} {{ comment.author.last_name }}
+                  {% else %}
+                    {{ comment.author.username }}
+                  {% endif %}
                 </p>
                 <p
                   style="

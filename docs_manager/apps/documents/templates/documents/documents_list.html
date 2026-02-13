@@ -120,7 +120,15 @@
                     <img src="{% static 'img/icon-document.svg' %}" alt="Thumbnail" />
                 </a>
               <div class="card-info-texts">
-                <a id="title-document" href="{% url 'documents_details' document.pk %}"><b>{{ document.title }}</b> publicado por <b>{{ document.author }}</b></a>
+                <a id="title-document" href="{% url 'documents_details' document.pk %}"><b>{{ document.title }}</b> publicado por
+                     <b>
+                    {% if document.author.first_name and document.author.last_name %}
+                            {{ document.author.first_name }} {{ document.author.last_name }}
+                    {% else %}
+                            {{ document.author.username }}
+                    {% endif %}
+                    </b>
+                </a>
                 <div class="card-info-texts-details">
                   <p>{{document.file_extension}}</p>
                   <p>{{document.get_file_size_display}}</p>
