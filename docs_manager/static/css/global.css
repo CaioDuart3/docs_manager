@@ -61,21 +61,58 @@ a {
     cursor: pointer;
 }
 
-/* Input de arquivo minimalista estilizado */
+/*
+================================================================
+INPUT DE ARQUIVOS 
+===============================================================
+*/
 input[type="file"] {
     width: 100%;
-    padding: 10px 15px;
+    padding: var(--space-sm);
     font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
     cursor: pointer;
     box-sizing: border-box;
-    margin-bottom: 15px;
-    background-color: #f9f9f9;
-    color: #333;
+    margin-bottom: var(--space-md);
+    background-color: var(--color-primary-soft);
+    color: var(--color-text-subtitle);
+    font-family: var(--font-base);
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+}
+
+/* Hover deixa o fundo levemente mais escuro */
+input[type="file"]:hover {
+    background-color: #dfe3f4; 
+    border-color: #cbd5e1; 
+}
+
+/* Foco adiciona sombra suave e borda do gradiente */
+input[type="file"]:focus {
+    outline: none;
+    border-color: #155DFC; 
+    box-shadow: 0 0 0 3px rgba(21, 93, 252, 0.2);
+}
+
+/* Estilo do botão interno (Escolher arquivo) */
+input[type="file"]::file-selector-button {
+    padding: 8px 15px;
+    margin-right: 10px;
+    border: none;
+    border-radius: var(--radius-sm);
+    background: var(--color-primary);
+    color: var(--color-white);
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+    font-family: var(--font-base);
+}
+
+/* Hover do botão */
+input[type="file"]::file-selector-button:hover {
+    background: linear-gradient(135deg, #1447E6 0%, #0f36c0 100%);
 }
 
 .page {
@@ -312,7 +349,7 @@ h2 {
     padding: var(--space-sm);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
-    flex-wrap: wrap; /* Essencial para responsividade */
+    flex-wrap: wrap;
     background: #fff;
 }
 
@@ -322,7 +359,7 @@ h2 {
     align-items: center;
     gap: var(--space-sm);
     flex: 1;
-    min-width: 240px; /* Se ficar muito pequeno, quebra linha */
+    min-width: 240px;
 }
 
 .card-info-texts {
@@ -330,7 +367,7 @@ h2 {
     flex-direction: column;
     gap: 4px;
     flex: 1;
-    min-width: 0; /* Permite text-overflow funcionar */
+    min-width: 0; 
 }
 
 .card-info-texts h3 {
