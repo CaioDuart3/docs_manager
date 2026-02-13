@@ -10,7 +10,7 @@
 
 ## 📋 Sobre o Projeto
 
-O projeto utiliza a arquitetura monolítica do Django para gerenciar o ciclo de vida de documentos e comentários, oferecendo uma interface intuitiva e níveis de acesso distintos para diferentes perfis de usuários.
+O projeto utiliza a arquitetura monolítica modular do Django para gerenciar o ciclo de vida de documentos e comentários, oferecendo uma interface intuitiva e níveis de acesso distintos para diferentes perfis de usuários.
 
 ### Funcionalidades Principais
 
