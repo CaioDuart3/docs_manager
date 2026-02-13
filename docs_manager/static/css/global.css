@@ -1,10 +1,8 @@
 /* ================================
    VARIÁVEIS GLOBAIS
 ================================ */
-
 :root {
     /* Cores */
-    
     --color-bg-page: #E8EAF6;
     --color-white: #FFFFFF;
     --color-text-title: #101828;
@@ -35,7 +33,6 @@
 /* ================================
    RESET
 ================================ */
-
 *,
 *::before,
 *::after {
@@ -48,14 +45,12 @@ html {
     font-size: 16px;
 }
 
-
-
 body {
     min-height: 100vh;
     font-family: var(--font-base);
     background: var(--color-bg-page);
     display: flex;
-    justify-content: center;
+    justify-content: center; /* Centraliza em telas grandes */
     align-items: center;
     padding: var(--space-lg);
     flex-direction: column;
@@ -65,10 +60,6 @@ a {
     all: unset;
     cursor: pointer;
 }
-
-
-
-
 
 /* Input de arquivo minimalista estilizado */
 input[type="file"] {
@@ -87,24 +78,18 @@ input[type="file"] {
     overflow: hidden;
 }
 
-
-.page{
+.page {
     display: flex;
     flex-direction: column;
     gap: 16px;
-    width: auto;
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 16px;
 }
-
-
 
 /* ================================
    CONTAINER
 ================================ */
-
 .container {
     width: 100%;
     max-width: 1200px;
@@ -120,11 +105,11 @@ input[type="file"] {
 /* ================================
    TÍTULOS
 ================================ */
-
 h1 {
     font-size: 1.875rem;
     font-weight: 400;
     color: var(--color-text-title);
+    line-height: 1.2; /* Melhor leitura em mobile */
 }
 
 h2 {
@@ -135,8 +120,6 @@ h2 {
 /* ================================
    INPUT / BUSCA
 ================================ */
-
-
 .label-input {
     display: block;
     margin-bottom: var(--space-xs);
@@ -151,6 +134,7 @@ h2 {
     padding: var(--space-xs) var(--space-sm);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
+    width: 100%; /* Garante largura total */
 }
 
 .input-group input {
@@ -158,6 +142,7 @@ h2 {
     border: none;
     font-size: 1rem;
     background: transparent;
+    width: 100%; /* Fix para inputs em flex items */
 }
 
 .input-group input:focus {
@@ -167,11 +152,16 @@ h2 {
 /* ================================
    LOGIN
 ================================ */
-
-.container-logo{
+.container-logo {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 20px;
+}
+
+.container-logo img {
+    max-width: 100%;
+    height: auto;
 }
 
 /* Card de login */
@@ -185,14 +175,9 @@ h2 {
     flex-direction: column;
     gap: var(--space-md);
     box-shadow: var(--shadow-card);
+    margin: auto; /* Centralização segura */
 }
 
-/* Logo */
-.container-login img {
-    align-self: center;
-}
-
-/* Títulos */
 .container-login h1 {
     text-align: center;
 }
@@ -202,19 +187,16 @@ h2 {
     font-size: 0.95rem;
 }
 
-/* Formulário */
 .form-login {
     display: flex;
     flex-direction: column;
     gap: var(--space-md);
 }
 
-/* Inputs */
 .form-login .input-group {
     height: 44px;
 }
 
-/* Botão */
 .button-login {
     height: 44px;
     border-radius: var(--radius-md);
@@ -235,36 +217,37 @@ h2 {
     filter: brightness(0.9);
 }
 
-
-
 /* ================================
    HEADER + UPLOAD
 ================================ */
-
 .container-title-upload {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: var(--space-md);
-    flex-wrap: wrap;
+    flex-wrap: wrap; /* Permite quebrar linha */
 }
 
 .container-title-upload > div {
     display: flex;
     flex-direction: row;
     gap: 16px;
+    flex-wrap: wrap;
 }
 
-.container-title{
+.container-title {
     display: flex;
-height: 60px;
-flex-direction: column;
-align-items: flex-start;
-flex: 1 0 0;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    flex: 1;
+    min-width: 200px; /* Garante tamanho mínimo antes de quebrar */
 }
+
 .button {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: var(--space-xs);
     padding: 10px 20px;
     border-radius: var(--radius-md);
@@ -273,33 +256,33 @@ flex: 1 0 0;
     font-weight: 500;
     cursor: pointer;
     white-space: nowrap;
+    border: none;
 }
 
 /* ================================
    LISTA DE DOCUMENTOS
 ================================ */
-
 .logout-button {
-    display: inline-flex;           /* flex para alinhar o texto */
-    align-items: center;            /* centraliza verticalmente */
-    justify-content: flex-start;    /* alinhado à esquerda do container */
-    gap: 8px;                       /* se você quiser ícone depois, mantém espaço */
-    width: 100%;                    /* ocupa toda a largura disponível */
-    background-color: transparent;  /* sem fundo */
+    display: inline-flex;
+    align-items: center; 
+    justify-content: flex-start;
+    gap: 8px;                   
+    width: 100%;                
+    background-color: transparent;
     color: #4A5565;
-    border: none;                   /* remove borda padrão do botão */
-    text-decoration: none;          /* remove sublinhado se houver link */
+    border: none;                 
+    text-decoration: none;          
     font-family: Arimo, sans-serif;
     font-size: 16px;
     font-weight: 400;
     line-height: 24px;
-    cursor: pointer;                /* mostra que é clicável */
-    padding: 0;                     /* remove padding padrão */
+    cursor: pointer;                
+    padding: 0;                     
 }
 
 .logout-button button {
-    all: unset;                     /* remove estilo padrão do botão */
-    display: inline-flex;            /* para manter o flex dentro do form */
+    all: unset;                     
+    display: inline-flex;           
     align-items: center;
     width: 100%;
     cursor: pointer;
@@ -308,17 +291,18 @@ flex: 1 0 0;
 
 
 
+
 .documents-count {
     color: var(--color-text-subtitle);
     font-size: 1rem;
 }
 
-
-.container-cards-document{
+.container-cards-document {
     display: flex;
     flex-direction: column;
     gap: 12px;
 }
+
 /* Card */
 .card-document {
     display: flex;
@@ -328,7 +312,8 @@ flex: 1 0 0;
     padding: var(--space-sm);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
-    flex-wrap: wrap;
+    flex-wrap: wrap; /* Essencial para responsividade */
+    background: #fff;
 }
 
 /* Info esquerda */
@@ -337,36 +322,39 @@ flex: 1 0 0;
     align-items: center;
     gap: var(--space-sm);
     flex: 1;
-    min-width: 240px;
+    min-width: 240px; /* Se ficar muito pequeno, quebra linha */
 }
 
 .card-info-texts {
     display: flex;
     flex-direction: column;
     gap: 4px;
-    flex: 1;         
-    min-width: 0;     
+    flex: 1;
+    min-width: 0; /* Permite text-overflow funcionar */
 }
-
 
 .card-info-texts h3 {
     font-size: 1rem;
     font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Corta texto longo com "..." */
 }
 
 .card-info-texts div {
     display: flex;
-    flex-direction: row; 
-    align-items: center; 
+    flex-direction: row;
+    align-items: center;
     gap: var(--space-sm);
     font-size: 0.875rem;
     color: var(--color-text-subtitle);
+    flex-wrap: wrap;
 }
-
 
 /* Ícones direita */
 .card-icons {
     display: flex;
+    justify-content: flex-end;
     align-items: center;
     gap: var(--space-xs);
     flex-wrap: wrap;
@@ -386,38 +374,26 @@ flex: 1 0 0;
 .icon-comments-counts p {
     color: var(--color-primary);
     font-size: 0.875rem;
+    margin: 0;
 }
 
 /* ================================
    DETALHES – DOCUMENTO
 ================================ */
-
 .back-button {
-    display: inline-flex;          /* flex para alinhar ícone e texto */
-    align-items: center;           /* centraliza verticalmente SVG e texto */
-    justify-content: flex-start;   /* alinha à esquerda do container */
-    gap: 8px;                      /* espaço entre SVG e texto */
-    width: 100%;                   /* ocupa toda a largura do container */
-    background-color: transparent; /* sem fundo */
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    width: fit-content;
+    background-color: transparent;
     color: #4A5565;
-    text-decoration: none;         /* remove sublinhado do link */
-    font-family: Arimo, sans-serif;
+    text-decoration: none;
     font-size: 16px;
-    font-weight: 400;
-    line-height: 24px;
 }
 
 .back-button svg {
-    display: block;                /* remove espaço extra abaixo do SVG */
-    stroke: currentColor;          /* herda a cor do texto */
-}
-
-
-/* Ações (download / excluir) */
-.card-icons {
-    display: flex;
-    gap: var(--space-sm);
-    align-items: center;
+    display: block;
+    stroke: currentColor;
 }
 
 .buttons-details-download,
@@ -429,7 +405,7 @@ flex: 1 0 0;
     padding: 0 16px;
     border-radius: 10px;
     cursor: pointer;
-    transition: filter 0.2s ease, transform 0.1s ease;
+    transition: all 0.2s ease;
 }
 
 .buttons-details-download {
@@ -441,27 +417,6 @@ flex: 1 0 0;
     border: none;
 }
 
-.buttons-details-download:hover,
-.buttons-details-delete:hover {
-    filter: brightness(0.95);
-}
-
-.buttons-details-download:active,
-.buttons-details-delete:active {
-    transform: scale(0.98);
-}
-
-.buttons-details-download p {
-    color: var(--color-text-subtitle);
-    font-size: 14px;
-}
-
-.buttons-details-delete p {
-    color: #E7000B;
-    font-size: 14px;
-}
-
-/* Textos de detalhes */
 .subtitle-details {
     color: var(--color-text-subtitle);
     font-size: 14px;
@@ -473,20 +428,32 @@ flex: 1 0 0;
     font-size: 14px;
     line-height: 22px;
     max-width: 100%;
-    word-break: break-word;
+    word-break: break-word; /* Quebra palavras longas */
 }
 
-/* Título das seções */
 .title-container-details {
     color: var(--color-text-title);
     font-size: 18px;
     font-weight: 400;
+    margin-bottom: 10px;
+}
+
+/* Container que segura detalhes e comentários */
+.container-cards-details {
+    display: flex;
+    flex-direction: row;
+    gap: 32px; /* Adicionado gap */
+    width: 100%;
+}
+
+/* Flex grow para as colunas */
+.container-cards-details > div {
+    flex: 1;
 }
 
 /* ================================
    COMENTÁRIOS
 ================================ */
-
 .text-field-comments,
 textarea {
     width: 100%;
@@ -515,103 +482,128 @@ textarea:focus {
     color: var(--color-white);
     border: none;
     cursor: pointer;
-    transition: filter 0.2s ease;
 }
 
-.button-details-comment:hover {
-    filter: brightness(0.95);
-}
-
-.list-comments{
+.list-comments {
     display: flex;
-height: 173px;
-flex-direction: column;
-align-items: flex-start;
-gap: 16px;
-align-self: stretch;
+    
+    height: auto; 
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    width: 100%;
+    margin-top: 20px;
 }
 
-.card-comments{
+.card-comments {
     display: flex;
-height: 47px;
-align-items: flex-start;
-gap: 16px;
-flex-shrink: 0;
-align-self: stretch;
+    align-items: flex-start;
+    gap: 16px;
+    width: 100%;
 }
 
-.profile{
+.profile {
     display: flex;
-width: 40px;
-height: 40px;
-padding-right: 0.012px;
-justify-content: center;
-align-items: center;
-border-radius: 26843500px;
-background: #E8EAF6;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%; 
+    background: #E8EAF6;
 }
 
-.comment-details{
-display: flex;
-padding-right: 867.238px;
-align-items: flex-end;
-gap: 8px;
-align-self: stretch;
+.comment-details {
+    display: flex;
+    flex-direction: column; /* Organiza nome e texto verticalmente */
+    gap: 4px;
+    flex: 1;
 }
 
-.comment-text{
-color: #4A5565;
-font-family: Arimo;
-font-size: 14px;
-font-style: normal;
-font-weight: 400;
-line-height: 22px;
+.comment-text {
+    color: #4A5565;
+    font-size: 14px;
+    line-height: 22px;
+    word-break: break-word;
 }
+
 /* ================================
-   RESPONSIVIDADE documents_list.html
+   RESPONSIVIDADE (MEDIA QUERIES)
 ================================ */
 
+/* Tablet e Mobile Grande */
+@media (max-width: 900px) {
+    .container-cards-details {
+        flex-direction: column; /* Comentários vão para baixo dos detalhes */
+    }
+}
+
+/* Mobile Padrão */
 @media (max-width: 768px) {
     body {
-        padding: var(--space-md);
+        padding: var(--space-sm);
+        justify-content: flex-start; /* Permite scroll no topo */
+        height: auto;
     }
 
     .container {
-        padding: var(--space-md);
+        padding: var(--space-sm);
+        width: 100%;
     }
 
     .container-title-upload {
         flex-direction: column;
-        align-items: stretch;
+        align-items: flex-start;
     }
-
-    .upload {
-        justify-content: center;
+    
+    .container-title-upload > div {
         width: 100%;
+        justify-content: space-between;
     }
 
+    .button {
+        width: 100%; /* Botões ocupam largura total no mobile */
+    }
+
+    /* Card de Documento vira bloco vertical */
     .card-document {
         flex-direction: column;
         align-items: flex-start;
     }
 
+    .card-info {
+        width: 100%;
+    }
+
     .card-icons {
         width: 100%;
-        justify-content: space-between;
+        justify-content: flex-start;
+        margin-top: 10px;
+        border-top: 1px solid var(--color-border);
+        padding-top: 10px;
+    }
+
+    /* Detalhes */
+    .buttons-details-download,
+    .buttons-details-delete {
+        flex: 1; /* Botões dividem espaço */
+        justify-content: center;
     }
 }
 
+/* Mobile Pequeno */
 @media (max-width: 480px) {
-    body {
-        padding: 0;
-    }
-
-    .container {
-        border-radius: 0;
-        min-height: 100vh;
-    }
-
     h1 {
         font-size: 1.5rem;
+    }
+    
+    .container-cards-details {
+        gap: 16px;
+    }
+    
+    .card-info-texts div {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
     }
 }
