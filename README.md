@@ -137,7 +137,7 @@ O projeto estará disponível em `http://127.0.0.1:8000`.
     │  │  ├─ static      // Assets específicos do app
     │  │  └─ templates   // Telas de documentos
     │  └─ users          // Gestão de usuários e autenticação
-    │     └─ templates   // Telas de login/usuários
+    │     └─ templates   // Tela de login
     ├─ docs_manager      // Configurações centrais do Django (Settings)
     └─ static            // Estilização e assets globais
         ├─ css
@@ -148,15 +148,24 @@ O projeto estará disponível em `http://127.0.0.1:8000`.
 ---
 
 
-## 👁️ Observações Relevantes para Melhorias Futuras
+## 👁️ Observações Relevantes
 
-O projeto atual do Docs Manager apresenta algumas oportunidades de melhoria para torná-lo mais robusto e escalável:
+Ao criar super usuários, eles terão acesso a todas as funcionalidades, incluindo:
+- Criação e gerenciamento de usuários;
+- Upload, visualização, download e exclusão de qualquer documento;
+- Visualização e adição de comentários em qualquer documento.
 
-- **Front-end:** A interface é construída com HTML, CSS e JavaScript puro. Há uma oportunidade de criar componentes reutilizáveis e mais interativos, facilitando a manutenção e evolução da aplicação.
+Usuários comuns possuem acesso mais limitado. Eles podem:
 
-- **Segurança:** O sistema não possui verificação em dois fatores nem mecanismos de recuperação de conta, o que representa uma oportunidade de melhoria a ser abordada em futuras versões.
+- Apagar apenas seus próprios documentos;
+- Upload, visualização e download de documentos;
+- Visualizar e adicionar comentários em qualquer documento.
+
+---
+
+⚠️ Atenção: Este site foi para produção com ferramentas 100% gratuitas, como Koyeb e Supabase. Por isso, o desempenho pode ser limitado devido às restrições de hardware dos planos gratuitos. Agradeço sua paciência e compreensão!
 
 ---
 
 
-**Desenvolvido com ☕ por **Caio Duarte**
+> Desenvolvido com ☕ por **Caio Duarte**
