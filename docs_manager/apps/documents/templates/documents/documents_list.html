@@ -19,10 +19,34 @@
       <!-- logout -->
       <form class="logout-button" method="post" action="{% url 'logout' %}">
         {% csrf_token %}
+        <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="20"
+        height="20"
+        viewBox="0 0 20 20"
+        fill="none"
+      >
+        <path
+          d="M9.99996 15.8334L4.16663 10L9.99996 4.16669"
+          stroke="#4A5565"
+          stroke-width="1.66667"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M15.8333 10H4.16663"
+          stroke="#4A5565"
+          stroke-width="1.66667"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
         <button type="submit">Sair da conta</button>
       </form>
-
-
+      <!-- encaminha para painel do admin -->
+       {% if document.author == current_user or current_user.is_staff or current_user.is_superuser %}
+      <a class="back-button" href="{% url 'admin:index' %}">Painel Administrativo</a>
+      {% endif %}
       <div class="container">
         <div class="container-title-upload">
           <div>
@@ -108,7 +132,7 @@
         </div>
 
         <p class="documents-count">
-          {{ documents.count}} documento(s) encontrado(s).
+          {{ documents.count}} documento(s) ao total foram encontrado(s).
         </p>
 
         <!-- lista de cards dos documentos -->
