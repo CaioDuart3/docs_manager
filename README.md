@@ -26,7 +26,7 @@ Você pode conferir a aplicação em produção [clicando aqui](https://occasion
 
 * **Python 3.12** (Back-end)
 * **Django 6.0.2** (Framework Back-end)
-* **SQLite3** (Banco de dados)
+* **Supabase** (Postgresql em nuvem)
 * **HTML5, CSS3 e JavaScript** (Front-end)
 
 ---
@@ -124,8 +124,6 @@ O projeto estará disponível em `http://127.0.0.1:8000`.
 ## 👁️ Observações Relevantes para Melhorias Futuras
 
 O projeto atual do Docs Manager apresenta algumas oportunidades de melhoria para torná-lo mais robusto e escalável:
-
-- **Banco de Dados:** Atualmente utiliza SQLite3, que é adequado para desenvolvimento, mas apresenta limitações em ambientes com grande volume de usuários e dados. Considerar migração para um banco mais robusto, como PostgreSQL, Supabase ou MySQL, pode melhorar performance e confiabilidade.
 
 - **Front-end:** A interface é construída com HTML, CSS e JavaScript puro. Há uma oportunidade de criar componentes reutilizáveis e mais interativos, facilitando a manutenção e evolução da aplicação.
 
