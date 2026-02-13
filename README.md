@@ -70,14 +70,41 @@ Crie um arquivo `.env` na raiz do projeto seguindo o modelo abaixo:
 
 ```env
 # Chave secreta do Django
-# Gere uma nova com: python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
+# Substitua pelo valor gerado com a execução:
+# python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
 SECRET_KEY=sua-secret-key-aqui
 
-# Configurações de Ambiente
+# Ativa ou desativa o modo de debug
+# True para desenvolvimento (mostra erros detalhados)
+# False para produção (não mostra erros e aumenta a segurança)
 DEBUG=True
-ALLOWED_HOSTS=localhost,127.0.0.1
+
+# Hosts permitidos para acessar o site
+# Separe múltiplos hosts por vírgula
+# Em produção, adicione o domínio real do seu site
+ALLOWED_HOSTS=localhost,127.0.0.1,www.seudominio.com
+
+# Configurações do banco de dados PostgreSQL (Supabase)
+# Nome do banco de dados criado no Supabase
+DB_NAME=nome_do_banco_de_dados
+
+# Usuário do banco de dados
+# Normalmente 'postgres' no Supabase
+DB_USER=usuario_do_banco
+
+# Senha do banco de dados
+# A senha que você definiu ao criar o projeto no Supabase
+DB_PASSWORD=minha_senha
+
+# Host do banco de dados
+DB_HOST=host_do_banco
+
+# Porta do banco de dados
+# Normalmente 5432 para PostgreSQL
+DB_PORT=porta_do_banco
 
 ```
+> ⚠️ **Dica:** Para rodar localmente, você pode usar PostgreSQL instalado na sua máquina. Para produção, configure as variáveis fornecidas pelo Supabase.
 
 ### 5. Migrações e Superusuário
 
