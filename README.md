@@ -111,7 +111,7 @@ O projeto estará disponível em `http://127.0.0.1:8000`.
     │  │  └─ templates   // Telas de documentos
     │  └─ users          // Gestão de usuários e autenticação
     │     └─ templates   // Telas de login/usuários
-    ├─ docs_manager      // Configurações centrais do Django (Settings/URLs)
+    ├─ docs_manager      // Configurações centrais do Django (Settings)
     └─ static            // Estilização e assets globais
         ├─ css
         └─ img
