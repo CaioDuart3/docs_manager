@@ -10,7 +10,10 @@
 
 ## 📋 Sobre o Projeto
 
-O projeto utiliza a arquitetura monolítica modular do Django para gerenciar o ciclo de vida de documentos e comentários, oferecendo uma interface intuitiva e níveis de acesso distintos para diferentes perfis de usuários.
+O projeto é construído sobre uma **arquitetura monolítica modular do Django**, permitindo gerenciar de forma eficiente o ciclo de vida de documentos e comentários. Ele oferece uma interface intuitiva e controle de acesso diferenciado para diferentes perfis de usuários.
+
+Você pode conferir a aplicação em produção [clicando aqui](https://occasional-christin-caioduart3-2bee5def.koyeb.app/) (hospedado no Koyeb).
+
 
 ### Funcionalidades Principais
 
@@ -116,5 +119,19 @@ O projeto estará disponível em `http://127.0.0.1:8000`.
 ```
 
 ---
+
+
+## 👁️ Observações Relevantes para Melhorias Futuras
+
+O projeto atual do Docs Manager apresenta algumas oportunidades de melhoria para torná-lo mais robusto e escalável:
+
+- **Banco de Dados:** Atualmente utiliza SQLite3, que é adequado para desenvolvimento, mas apresenta limitações em ambientes com grande volume de usuários e dados. Considerar migração para um banco mais robusto, como PostgreSQL, Supabase ou MySQL, pode melhorar performance e confiabilidade.
+
+- **Front-end:** A interface é construída com HTML, CSS e JavaScript puro. Há uma oportunidade de criar componentes reutilizáveis e mais interativos, facilitando a manutenção e evolução da aplicação.
+
+- **Segurança:** O sistema não possui verificação em dois fatores nem mecanismos de recuperação de conta, o que representa uma oportunidade de melhoria a ser abordada em futuras versões.
+
+---
+
 
 **Desenvolvido com ☕ por **Caio Duarte**
